@@ -12,9 +12,24 @@ export function useOnDraw() {
 
     function initMouseMoveListener() {
         const mouseMoveListener = (e) => {
-            console.log({x:e.clientX , y:e.clientY})
+            const point = computePointInCanvas(e.clientX, e.clientY)
+            console.log(point)
         }
         window.addEventListener('mousemove',mouseMoveListener)
+    }
+
+    function computePointInCanvas(clientX,clientY) {
+       const boundingRect = canvasRef.current.getBoundingClientRect();
+       if(canvasRef){
+        return {
+            x : clientX - boundingRect.left,
+            y : clientY - boundingRect.top,
+       }
+       }
+       else{
+        return null
+       }
+       
     }
 
     return setCanvasRef;
