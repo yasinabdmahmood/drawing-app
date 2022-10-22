@@ -4,7 +4,16 @@ import { useOnDraw } from './Hooks';
 function Canvas(props) {
     const {width,height} = props;
 
-    const setCanvasRef = useOnDraw();
+    function onDraw(ctx, point){
+        ctx.fillStyle = '#000000'
+        ctx.beginPath();
+        ctx.arc(point.x , point.y , 2 , 0 , 2*Math.PI);
+        ctx.fill()
+    }
+
+    const setCanvasRef = useOnDraw(onDraw);
+
+
 
     return (
         <div>
