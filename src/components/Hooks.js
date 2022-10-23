@@ -9,6 +9,8 @@ export function useOnDraw(onDraw) {
     const mouseUpListenerRef = useRef(null);
     const mouseDownListenerRef = useRef(null);
 
+    const prevPoint = useRef(null)
+
     useEffect(() => {
         return () => {
             if (mouseMoveListenerRef.current) {
@@ -40,7 +42,8 @@ export function useOnDraw(onDraw) {
             if(isDrawingRef.current){
             const point = computePointInCanvas(e.clientX, e.clientY)
             const ctx = canvasRef.current.getContext('2d')
-            if(onDraw) onDraw(ctx,point)
+            if(onDraw) onDraw(ctx,point,prevPoint.current)
+            prevPoint.current=point
             console.log(point)
             }
             
