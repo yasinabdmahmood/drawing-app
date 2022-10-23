@@ -1,4 +1,3 @@
-import React from 'react';
 import { useOnDraw } from './Hooks';
 
 function Canvas(props) {
@@ -22,6 +21,8 @@ function Canvas(props) {
        ctx.beginPath();
        ctx.arc(start.x , start.y , 2 , 0 , 2*Math.PI);
        ctx.fill()
+
+       
     }
 
     const setCanvasRef = useOnDraw(onDraw);
@@ -36,6 +37,7 @@ function Canvas(props) {
                 style={canvasStyle}
                 ref={setCanvasRef}
             />
+          
         </div>
     );
 }

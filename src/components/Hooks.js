@@ -12,19 +12,19 @@ export function useOnDraw(onDraw) {
     const prevPointRef = useRef(null)
 
     useEffect(() => {
+        initMouseMoveListener();
+        initMouseUpListener();
         return () => {
             if (mouseMoveListenerRef.current) {
-                //window.removeEventListener("mousemove", mouseMoveListenerRef.current);
-                console.log('mousemove is removed')
+                window.removeEventListener("mousemove", mouseMoveListenerRef.current);
             }
             if (mouseUpListenerRef.current) {
-                //window.removeEventListener("mouseup", mouseUpListenerRef.current);
-                console.log('mouseup is removed')
+                window.removeEventListener("mouseup", mouseUpListenerRef.current);
             }
          
             
         }
-    },[onDraw])
+    },[])
 
     function setCanvasRef(ref) {    
         if(!ref) return;
@@ -40,9 +40,9 @@ export function useOnDraw(onDraw) {
     function initMouseMoveListener() {
         const mouseMoveListener = (e) => {
             if(isDrawingRef.current){
-            const point = computePointInCanvas(e.clientX, e.clientY)
-            const ctx = canvasRef.current.getContext('2d')
-            if(onDraw) onDraw(ctx,point,prevPointRef.current)
+            const point = computePointInCanvas(e.clientX, e.clientY);
+            const ctx = canvasRef.current.getContext('2d');
+            if(onDraw) onDraw(ctx,point,prevPointRef.current);
             prevPointRef.current=point;
             }
             
