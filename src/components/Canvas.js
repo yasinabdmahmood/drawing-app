@@ -5,10 +5,7 @@ function Canvas(props) {
     const {width,height} = props;
 
     function onDraw(ctx, point, prevPoint){
-        // ctx.fillStyle = '#000000'
-        // ctx.beginPath();
-        // ctx.arc(point.x , point.y , 2 , 0 , 2*Math.PI);
-        // ctx.fill()
+        
         drawLine(prevPoint, point, ctx, '#000000', 5)
     }
 
@@ -20,6 +17,11 @@ function Canvas(props) {
        ctx.moveTo(start.x, start.y);
        ctx.lineTo(end.x, end.y);
        ctx.stroke();
+
+       ctx.fillStyle = color
+       ctx.beginPath();
+       ctx.arc(start.x , start.y , 2 , 0 , 2*Math.PI);
+       ctx.fill()
     }
 
     const setCanvasRef = useOnDraw(onDraw);
